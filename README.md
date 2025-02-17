@@ -12,5 +12,5 @@ Program ini bertujuan untuk menyelesaikan permainan IQ Puzzler Pro menggunakan A
 ## Cara Mengkompilasi & Menjalankan Program
 
 ## Author
-_Nama: Samantha Laqueenna Ginting
-NIM: 13523138_
+Nama: Samantha Laqueenna Ginting <br/>
+NIM: 13523138

@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class FileHandler {
@@ -31,31 +33,26 @@ public class FileHandler {
 
                 // Check Type and Read Pieces
                 if (Type.equals("DEFAULT")) {
-                    String prevPiece = "";
+                    String prevPiece = "zzz";
                     int row = 0;
+                    int col = 0;
 
                     while (scanner.hasNextLine()) {
                         String line = scanner.nextLine();
-                        String[] line_array = line.split("");
-                        String currPiece = line_array[0];
-
-                        // Check Apakah Dalam Satu Baris, Alphabet Sama
-                        if (!IsElementsEqual(line_array)){
-                            System.out.println("Invalid Piece.");
-                            err = -405;
-                            break;
+                        row = 0;
+                        for (int i=0; i<line.length(); i++) {
+                            if (line.charAt(i) >= 'A' && line.charAt(i) <= 'Z') {
+                                String currPiece = String.valueOf(line.charAt(i));
+                                if (!currPiece.equals(prevPiece)) {
+                                    prevPiece = currPiece;
+                                    col = 0;
+                                }          
+                                Pieces.putIfAbsent(currPiece, new ArrayList<>());
+                                Pieces.get(currPiece).add(new int[]{col, row});
+                            }
+                            row++;
                         }
-
-                        // Loop Tiap Baris
-                        for (int col = 0; col<line_array.length; col++) {
-                            if (!currPiece.equals(prevPiece)) {
-                                prevPiece = currPiece;
-                                row = 0; // Reset Row Jika Merupakan Piece Baru
-                            }          
-                            Pieces.putIfAbsent(currPiece, new ArrayList<>());
-                            Pieces.get(currPiece).add(new int[]{row, col});
-                        }
-                        row++;
+                        col++;
                     }
 
                     // Check Jumlah Piece
@@ -73,24 +70,44 @@ public class FileHandler {
             }
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File not found.");
             err = -405;
         }
     }
 
-    public static boolean IsElementsEqual(String[] array){
-        for (int i = 1; i < array.length; i++) {
-            if (!array[i].equals(array[0])) {
-                return false;
+    public static void WriteFile(String fileName) {
+        try {
+            int rows = Algorithm.Board.length;
+            int cols = Algorithm.Board[0].length;
+            FileWriter writer = new FileWriter(fileName);
+
+            for (int c = 0; c < cols; c++) {
+                for (int r = 0; r < rows; r++) {
+                    writer.write(Algorithm.Board[r][c]);
+                }
+                writer.write("\n");
             }
+            writer.close();
+            
+            System.out.println("Berhasil menulis ke file.");
+        } catch (IOException e) {
+            System.out.println("Tidak dapat menulis ke file.");
         }
-        return true;
     }
+
+    // public static boolean IsElementsEqual(String[] array){
+    //     for (int i = 1; i < array.length; i++) {
+    //         if (!array[i].equals(array[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     /*
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandler();
-        File filee = new File("../test/1.txt");
+        File filee = new File("../test/2.txt");
         fileHandler.ReadFile(filee.getAbsolutePath());
 
         if (err == 0) {
@@ -112,5 +129,4 @@ public class FileHandler {
         }
     }
     */
-    
 }

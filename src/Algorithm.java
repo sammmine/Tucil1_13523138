@@ -58,9 +58,8 @@ public class Algorithm {
         }
         return reflected;
     }
-
+    
     // Generate semua kombinasi piece di HashSet (agar tidak ada duplikat)
-    // Return dalam bentuk List
     public static List<List<int[]>> generateVariants(List<int[]> piece) {
         Set<List<int[]>> variants = new HashSet<>();
         List<int[]> currentPiece = piece;
@@ -142,25 +141,3 @@ public class Algorithm {
         }
     } 
 }
-
-/*
-public static void main(String[] args) {
-        initializeBoard();
-        initializePieces();
-        
-        long startTime = System.nanoTime();
-        
-        System.out.println("Mencari solusi...");
-        if (solve(new ArrayList<>(FileHandler.Pieces.entrySet()))) {
-            System.out.println("Solusi ditemukan:");
-            printBoard();
-        } else {
-            System.out.println("Tidak ada solusi.");
-        }
-        
-        long endTime = System.nanoTime();
-        double elapsedTime = (endTime - startTime) / 1e9;
-        System.out.printf("Jumlah kemungkinan yang ditinjau: %d\n", counter);
-        System.out.printf("Waktu komputasi: %.6f detik\n", elapsedTime);
-    }
-*/

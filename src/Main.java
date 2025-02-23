@@ -1,8 +1,6 @@
 import java.io.File;
 import java.util.*;
 
-// 4.txt belum berhasil
-
 public class Main {
     public static void main(String[] args) {
         System.out.print("\033[H\033[2J");
@@ -18,7 +16,12 @@ public class Main {
                         " ░      ░                   ░       ░ ░      ░ ░        ░  ░   ░  ░   ░                    ░         ░ ░  \n" + //
                         "                                  ░        ░                                                              \n" + //
                         "");
-        // File filee = new File("../test/5.txt");
+        
+        // AUTO (PROGRAM)
+        // File filee = new File("../test/4.txt");
+        // FileHandler.ReadFile(filee.getAbsolutePath());
+
+        // MANUAL
         System.out.println("\nEnter File Name (ex: ../test/file.txt):");
         System.out.print(">> ");
         Scanner scanner = new Scanner(System.in);
@@ -27,15 +30,12 @@ public class Main {
         FileHandler.ReadFile(file.getAbsolutePath());
 
         if (FileHandler.err == 0) {
-            // System.out.println("Berhasil membaca file...");
-            // System.out.println("\nWorking On It, Please Wait...\n");
             System.out.println("\n...\n");
             
             Algorithm.initializeBoard();
 
             long startTime = System.nanoTime();
 
-            // System.out.println("Sedang mencari solusi...");
             if(Algorithm.solve(new ArrayList<>(FileHandler.Pieces.entrySet()))) {
                 System.out.println("Solution Found!\n");
                 Algorithm.printBoard();
@@ -48,25 +48,25 @@ public class Main {
 
                 System.out.println("\nDo You Want To Save The Solution To .txt? (y/n)");
                 System.out.print(">> ");
-                scanner = new Scanner(System.in);
-                answer = scanner.nextLine();
+                Scanner scanner1 = new Scanner(System.in);
+                String answer1 = scanner1.nextLine();
 
-                if (answer.equals("y")) {
+                if (answer1.equals("y")) {
                     System.out.println("\nEnter File Name (ex: file1.txt):");
                     System.out.print(">> ");
-                    String fileName = scanner.nextLine();
+                    String fileName = scanner1.nextLine();
                     FileHandler.WriteFile(fileName);
                 }
 
                 System.out.println("\nDo You Want To Save The Solution To .png? (y/n)");
                 System.out.print(">> ");
-                scanner = new Scanner(System.in);
-                answer = scanner.nextLine();
+                Scanner scanner2 = new Scanner(System.in);
+                String answer2 = scanner2.nextLine();
 
-                if (answer.equals("y")) {
+                if (answer2.equals("y")) {
                     System.out.println("\nEnter File Name (ex: image1.png):");
                     System.out.print(">> ");
-                    String fileName = scanner.nextLine();
+                    String fileName = scanner2.nextLine();
                     FileHandler.WriteImage(fileName);
                 }
             } else {

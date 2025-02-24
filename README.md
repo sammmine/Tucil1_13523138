@@ -12,8 +12,11 @@ Program ini dapat dijalankan dalam terminal lokal(cmd) atau VSCode. Pastikan bah
 
 ## Cara Mengkompilasi & Menjalankan Program
 **1.** Buka link repository GitHub, kemudian salin URL di bagian "Code" untuk melakukan git clone
+
 **2.** Buka terminal di VSCode atau CMD
+
 **3.** Arahkan directory ke folder tempat anda ingin melakukan git clone
+
 **4.** Perintahkan git clone
 ```
 git clone https://github.com/sammmine/Tucil1_13522138.git 
